@@ -14,7 +14,7 @@
         'views/templates.xml',
     ],
     'qweb': [
-        'static/src/xml/fields_text_count.xml',
+        # 'static/src/xml/fields_text_count.xml',
     ],
     'installable': True,
 }
