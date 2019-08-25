@@ -17,10 +17,11 @@ odoo.define('text_count', function(require) {
             var self = this;
             return this._super().then(function(){
                 if (self.mode === 'edit') {
-                    if (self.field.size && self.field.size > 0) {
-                        self.$el.attr('maxlength', self.field.size);
+                    if (self.attrs.size) {
+                        // this place can be improved should relay on self.field.size
+                        self.$el.attr('maxlength', parseInt(self.attrs.size));
                     }
-                    self.$el = self.$el.add($('<input class="text-counter"/>'));
+                    self.$el = self.$el.add($('<input class="text-counter" readonly="readonly"/>'));
                 }
             });
         },

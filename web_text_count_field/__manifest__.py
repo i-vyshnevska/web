@@ -14,5 +14,5 @@
         'views/templates.xml',
     ],
     'installable': True,
-    'post_load': 'patch_fields',
+    # 'post_load': 'patch_fields',
 }

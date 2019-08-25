@@ -1,16 +1,13 @@
-.oe_form_readonly {
-    .oe_form_frame_cell {
-        .field_text_count {
-            padding: 3px 2px 2px 2px;
-            background-color: white;
-            height: auto;
-            min-height:100px;
-        }
-    }
+.text-counter {
+    background-color: transparent;
+    float: right;
+    white-space: pre-wrap;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 2px 4px;
+    color: #1f1f1f;
+}
 
-    .oe_form_field_text_count {
-        div.field_text_count {
-            white-space: pre-wrap;
-        }
-    }
+div.field_text_count {
+    white-space: pre-wrap;
 }
