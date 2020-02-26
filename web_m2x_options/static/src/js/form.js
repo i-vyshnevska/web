@@ -21,63 +21,7 @@ odoo.define('web_m2x_options.web_m2x_options', function (require) {
         method: 'get_web_m2x_options',
     });
 
-    var M2ODialog = Dialog.extend({
-        template: "M2ODialog",
-        init: function (parent, name, value) {
-            this.name = name;
-            this.value = value;
-            this._super(parent, {
-                title: _.str.sprintf(_t("Create a %s"), this.name),
-                size: 'medium',
-                buttons: [{
-                    text: _t('Create'),
-                    classes: 'btn-primary',
-                    click: function () {
-                        if (this.$("input").val() !== '') {
-                            this.trigger_up('quick_create', {value: this.$('input').val()});
-                            this.close(true);
-                        } else {
-                            this.$("input").focus();
-                        }
-                    },
-                }, {
-                    text: _t('Create and edit'),
-                    classes: 'btn-primary',
-                    close: true,
-                    click: function () {
-                        this.trigger_up('search_create_popup', {
-                            view_type: 'form',
-                            value: this.$('input').val(),
-                        });
-                    },
-                }, {
-                    text: _t('Cancel'),
-                    close: true,
-                }],
-            });
-        },
-        start: function () {
-            this.$("p").text(_.str.sprintf(_t("You are creating a new %s, are you sure it does not exist yet?"), this.name));
-            this.$("input").val(this.value);
-        },
-        /**
-         * @override
-         * @param {boolean} isSet
-         */
-        close: function (isSet) {
-            this.isSet = isSet;
-            this._super.apply(this, arguments);
-        },
-        /**
-         * @override
-         */
-        destroy: function () {
-            if (!this.isSet) {
-                this.trigger_up('closed_unset');
-            }
-            this._super.apply(this, arguments);
-        },
-    });
+    var M2ODialog = new Dialog;
 
     FieldMany2One.include({
 
@@ -122,9 +66,16 @@ odoo.define('web_m2x_options.web_m2x_options', function (require) {
         },
 
         _onInputFocusout: function () {
+            var self = this;
             var m2o_dialog_opt = this.is_option_set(this.nodeOptions.m2o_dialog) || _.isUndefined(this.nodeOptions.m2o_dialog) && this.is_option_set(this.ir_options['web_m2x_options.m2o_dialog']) || _.isUndefined(this.nodeOptions.m2o_dialog) && _.isUndefined(this.ir_options['web_m2x_options.m2o_dialog']);
             if (this.can_create && this.floating && m2o_dialog_opt) {
-                new M2ODialog(this, this.string, this.$input.val()).open();
+                debugger;
+                var dialog = new Dialog(self, self.string, self.$input.val()).open();
+                var curr_dialog = new M2ODialog(this, this.string, this.$input.val()).open();
+                console.log(curr_dialog);
+                console.log(dialog);
+                return dialog;
+
             }
         },
 
