@@ -20,6 +20,7 @@ odoo.define('web_edit_user_filter', function (require) {
          * @private
          */
         _createFilter: function (filter) {
+            // method are broken
             var facets = [];
 
             this.query.each(function (facet) {
@@ -203,8 +204,8 @@ odoo.define('web_edit_user_filter', function (require) {
             this.$el.find('.o-edit-user-filter-popover').remove();
 
             _.each(this.input_subviews, function (input_subview) {
-                if (!input_subview.model ||
-                    input_subview.model.attributes.is_custom_filter) {
+                if (!input_subview.model || typeof(input_subview.model.attributes.is_custom_filter) == 'undefined' || input_subview.model.attributes.is_custom_filter
+                    ) {
                     return;
                 }
 
